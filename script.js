@@ -1,6 +1,10 @@
 const tbody = document.querySelector('#album-table > tbody')
 const tbodyPosts = document.querySelector('#posts-table > tbody')
+const btnClose = document.querySelector ('#btn-close')    
+const btnCloseSec = document.querySelector ('#btnCloseSec')    
 
+
+const modalTitle = document.querySelector('#modalTitle')
 const modalBody = document.querySelector('#modalBody')
 const commentsList = []
 const users = []
@@ -92,7 +96,7 @@ function renderPosts(){
 
 
   
-        json.forEach((post,index) => {
+        json.forEach(post => {
             let comentData = commentsList.filter((comment) => post.id === comment.postId)
             let usersData = users.find((user) => user.id === post.userId)
 
@@ -110,7 +114,7 @@ function renderPosts(){
             
             userId.textContent = usersData.name
             postId.textContent = post.id
-            postTitle.innerHTML = `${post.title} <a href='#' class='modal-open' data-bs-toggle="modal" data-bs-target="#modal"  data-coment-id="${post.id}"> (${comentDataLth})</a>` //колличество коментов и ссылка на них
+            postTitle.innerHTML = `${post.title} <a href='#' class='modal-open' data-bs-toggle="modal" data-bs-target="#modal"  data-coment-id="${post.id}"> (${comentDataLth})</a>` //количество коментов и ссылка на них
             postBody.textContent = post.body
             // console.log(post.id)
             
@@ -130,11 +134,13 @@ function renderPosts(){
         comentLinks.forEach(link => {
                 link.onclick = function(e) {
                     e.preventDefault()
-                   
+
+                   // modalTitle.textContent = this.postTitle.textContent
+                //    console.log(this.textContent)
                     fetch(`https://jsonplaceholder.typicode.com/comments?postId=${this.getAttribute('data-coment-id')}`)
                         .then(response => response.json())
                         .then(json => {
-                            console.log(json)
+                            
                             json.forEach(coment => {
 
                                 let tr = document.createElement('tr')
@@ -161,6 +167,9 @@ function renderPosts(){
 
 
                             })
+                            // console.log(modalBody)
+                            btnClose.addEventListener( "click", function(e){ modalBody.innerHTML ='' })
+                            btnCloseSec.addEventListener( "click", function(e){ modalBody.innerHTML ='' })
                         })
                 }
             })
@@ -171,9 +180,6 @@ function renderPosts(){
     })
 
 }
-
-
-
     
 
     
