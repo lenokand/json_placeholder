@@ -160,19 +160,6 @@ function renderPosts(){
                                 modalBody.appendChild(tr)
 
 
-
-
-
-
-                                // modalBody.innerHTML += `
-                                // <tr>
-                                //     <th>${coment.id}</th>
-                                //     <th>${coment.name} </th>
-                                //     <th>${coment.email}</th>
-                                //     <th>${coment.body}</th>
-                                
-                                //  </tr>
-                                // `
                             })
                         })
                 }
